@@ -7,7 +7,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Calculadora IMC<br/><br/></Text>
-      
       <Formulario />
     </View>
   );
@@ -15,11 +14,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'purple',
+    backgroundColor: 'tomato',
     fontSize: 10,
     fontWeight: '600',
-    padding: 4,
-    paddingLeft: 12,
+    padding: 20,
     textAlign: 'left',
     color: 'grey',
   },

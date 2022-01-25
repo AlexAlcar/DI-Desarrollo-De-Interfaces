@@ -8,21 +8,29 @@ const Formulario = () => {
     const [resultado, setResultado] = useState("");
     const [estilo, setEstilo] = useState("");
 
-    const handleButton = () => {
-        const imc = peso / Math.pow(altura, 2);
-        if (imc < 18.5) setResultado("Peso insuficiente");
-        if (imc >= 18.5 && imc <= 24.9) setResultado("Normopeso");
-        if (imc >= 25 && imc <= 26.9) setResultado("Sobrepeso Grado I");
-        if (imc >= 27 && imc <= 29.9) setResultado("Sobrepeso Grado II (Preobesidad)");
-        if (imc >= 30 && imc <= 34.9) setResultado("Obesidad de tipo I");
-        if (imc >= 35 && imc <= 39.9) setResultado("Obesidad de tipo II");
-        if (imc >= 40 && imc <= 49.9) setResultado("Obesidad de tipo III (Mórbida)");
-        if (imc > 50) setResultado("Obesidad de tipo IV (extrema)");
 
-        if (imc < 27) setEstilo({ color: 'green' });
-        if (imc > 27 && imc <= 39.9) setEstilo({ color: 'orange' });
-        if (imc >= 40) setEstilo({ color: 'red' });
-        setResp(true);
+    const handleButton = () => {
+        //validamos la entrada, string vacío y carácter
+        if (!/\d/.test(peso) || !/\d/.test(altura)) alert("¡Introduce solo números!");
+        else if (peso == "" || altura == "") alert("¡Debes rellenar todos los campos!");
+        else {
+            const imc = Math.round((peso / Math.pow(altura, 2)) * 100) / 100;
+            //condiciones para setear el hook resultado
+            if (imc < 18.5) setResultado(imc + " Peso insuficiente");
+            if (imc >= 18.5 && imc <= 24.9) setResultado(imc + " Normopeso");
+            if (imc >= 25 && imc <= 26.9) setResultado(imc + " Sobrepeso Grado I");
+            if (imc >= 27 && imc <= 29.9) setResultado(imc + " Sobrepeso Grado II (Preobesidad)");
+            if (imc >= 30 && imc <= 34.9) setResultado(imc + " Obesidad de tipo I");
+            if (imc >= 35 && imc <= 39.9) setResultado(imc + " Obesidad de tipo II");
+            if (imc >= 40 && imc <= 49.9) setResultado(imc + " Obesidad de tipo III (Mórbida)");
+            if (imc > 50) setResultado(imc + " Obesidad de tipo IV (extrema)");
+
+            if (imc < 27) setEstilo({ color: 'green' });
+            if (imc > 27 && imc <= 39.9) setEstilo({ color: 'orange' });
+            if (imc >= 40) setEstilo({ color: 'red' });
+            //seteamos a true para mostrar los Text del resultado
+            setResp(true);
+        }
     }
 
     return (
@@ -40,7 +48,6 @@ const Formulario = () => {
                 </> : null}
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontSize: 22,
-        color: 'red',
+        color: 'tomato',
         padding: 6,
     },
     tags: {
@@ -65,8 +72,6 @@ const styles = StyleSheet.create({
     btn: {
         color: 'white',
     },
-
-
 })
 
 export default Formulario;
